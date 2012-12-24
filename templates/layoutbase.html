@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{% block title %}Safety.com | Lets make India safer place {% endblock title %}</title>
+		{% block meta %}{% endblock meta %}
+		{% block css %}{% endblock css%}
+		{% block js %}{% endblock js%}
+	</head>
+<body>
+<div class="container">
+	<div class="header">
+			<div class="righttop">		
+	 		{% block loginregister %}
+			  {% if not user.is_authenticated %}<a href="/login/">login</a> | <a
+			    href="/register/">register</a>{% endif %}
+			  {% if user.is_authenticated %}<a href="/logout/">logout</a>
+			  {% endif %}
+			{% endblock loginregister%}
+			</div>
+		 
+	</div>
+	<div class="content">
+		<div class="messaging">{% if messages %} {% for message in messages %}<div class="{{ message.tags }}">{{ message }} </div>{% endfor %}{% endif %}</div>
+		<div style="margin-top:10px;">
+			{% block body %}
+				
+			{% endblock body%}
+		</div>
+	</div>
+	<div class="footer">
+			<hr/>
+			<div style="margin-left:450px;">2013 Safety  </div>
+	</div>
+</div>
+</body>
+</html>

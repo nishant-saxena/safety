@@ -1,0 +1,13 @@
+{% extends "layoutbase.html" %}
+{% block css %}
+	{% if is_live %}
+		<link rel="stylesheet" href="{{MEDIA_URL}}css/style.min.css" type="text/css" media="all" />
+		<script  type="text/javascript" src="{{MEDIA_URL}}js/main.min.js" type="text/css"  ></script>
+	{%else%}
+		<link rel="stylesheet" href="{{MEDIA_URL}}css/style.css" type="text/css" media="all" />
+		<script  type="text/javascript" src="{{MEDIA_URL}}js/main.js" type="text/css" ></script>
+	{% endif %}
+{% endblock css%}
+
+
+

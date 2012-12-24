@@ -1,0 +1,11 @@
+Each model methods in same model, also 
+   -- put 1) parameter validations in embedded
+      2) for each value length and type if make sense 
+      3) for list fields length
+      
+
+===============================================================
+REFERENCES
+### http://django-mongodb.org/tutorial.html
+###https://docs.djangoproject.com/en/dev/topics/auth/
+===============================================================

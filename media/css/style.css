@@ -1,0 +1,34 @@
+/* Style File  1 */
+.info {
+	color:green;
+}
+.error {
+	color:red;
+}
+.errorlist{
+	color:red;
+}
+table, th, td
+{
+	border: 1px solid black;
+}
+
+.messaging{
+    border:1px solid red;
+    margin-top:20px;
+}
+
+.header{
+    border:1px solid blue;
+    margin-bottom:2px;
+}
+.righttop{
+	float:right;
+	margin-right:30px;
+	margin-bottom:10px;
+	
+}
+.footer{
+	margin-top:20px;
+	
+}

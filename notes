@@ -1,0 +1,150 @@
+0) Daily usage commands 
+------------------Mongo start -----------
+sudo rm -Rf /var/lib/mongodb/mongod.lock
+service mongodb start
+From helios installed php plugin => for html ..
+-----------------------------------------
+
+1)Create SVN repo for project
+ Create project in [project] =>Create repository in [repository] => Checkpout Repo in some/[project] => Copy contents of A in C => Add all and commit => Delete project and checkout project   =>Use repositry to checkout
+2)Exclude pyc files and resolve pyc conflicts 
+$ cat .svnignore # Create .svnignore 
+.*\.pyc$
+*~
+$ svn -R propset svn:ignore -F .svnignore .
+property 'svn:ignore' set on '.'
+
+Ref http://pandemoniumillusion.wordpress.com/2008/05/07/ignore-pyc-files-in-subversion/
+If mess of pyc files 
+find -name "*.pyc" -exec svn revert {} \; # Revert all pyc files 
+find -name "*.pyc" -exec svn delete {} \; #Delete all pyc files 
+!! Apparently .pyc is ignored by default in the new Subversion.
+
+3) [Setting up Mongo ] http://django-mongodb.org/topics/setup.html
+A)   
+sudo git clone https://github.com/django-nonrel/django-nonrel  #checkout master # setup.py
+
+B)
+  When git site up 
+  sudo git clone https://github.com/django-nonrel/djangotoolbox
+  setup.py install worked  
+
+C)sudo  pip install git+https://github.com/django-nonrel/mongodb-engine
+
+
+4) User authentication and profile creation (https://docs.djangoproject.com/en/dev/topics/auth/)
+
+See djang_contrib_auth_models.py 
+Methods :- def get_hexdigest(algorithm, salt, raw_password)
+           def check_password(raw_password, enc_password)
+           def update_last_login(sender, user, **kwargs)
+           def _user_get_all_permissions(user, obj)
+           def _user_has_perm(user, perm, obj)
+           def _user_has_module_perms(user, app_label)
+Classes :- class PermissionManager(models.Manager)
+		   class Permission(models.Model)
+		   class Group(models.Model)
+		   class UserManager(models.Manager)
+		       def create_user(self, username, email, password=None)
+		       def create_superuser(self, username, email, password)
+		       make_random_password(self, length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789')
+		   ####### Most Imp Class 
+		   class User(models.Model)
+		       username , first_name , last_name ,password , is_staff , is_active , is_superuser, last_login , 
+		       date_joined , groups **** , user_permissions 
+		       objects = UserManager()  *** Very Important
+		       email => username unique, let him add email if verified email is not their ..**V.V.IMP**..
+		       get_absolute_url(self)
+		       username => unique v.v. imp.
+		       is_anonymous() v.v. imp. for non logged in user.
+		       is_authenticated(self)
+		       get_full_name(self)
+		       set_password(self, raw_password)
+		       check_password(self, raw_password)
+		       set_unusable_password(self)
+		       has_usable_password(self)
+		       get_group_permissions(self, obj=None)
+		       get_all_permissions(self, obj=None)
+		       has_perm(self, perm, obj=None)
+		       has_perms(self, perm_list, obj=None)
+		       has_module_perms(self, app_label) => USED TO SET APP LEVEL PERMISSIONS
+		       get_and_delete_messages(self)
+		       email_user(self, subject, message, from_email=None)
+		       get_profile(self) *** Important
+		       
+		       
+		 class Message(models.Model) # Sort of profiling .
+		 
+		 class AnonymousUser(object)
+		     def delete(self)
+		     def set_password(self, raw_password)
+		     def check_password(self, raw_password)
+		     def get_group_permissions(self, obj=None)
+		     def get_all_permissions(self, obj=None)
+		     def has_perm(self, perm, obj=None)
+		     def has_perms(self, perm_list, obj=None)
+		     def has_module_perms(self, module) ## Anonymous user has permission to app
+		     def is_anonymous(self)
+		     def is_authenticated(self) ## Imp
+	 	     
+		     
+user_logged_in.connect(update_last_login)
+
+5) 
+A) urls.py
+# Uncomment the next two lines to enable the admin:
+from django.contrib import admin
+admin.autodiscover()
+
+    url(r'^admin/', include(admin.site.urls)),
+B) settings.py 
+>>> from django.contrib.sites.models import Site
+>>> new_site = Site.objects.create(domain='foo.com', name='foo.com')
+>>> print new_site.id
+50d6b7b00e11d12d6c000000
+SITE_ID = "50d6b7b00e11d12d6c000000"
+
+    # Uncomment the next line to enable the admin:
+    'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    'django.contrib.admindocs',
+C) Python manage.py syncdb
+
+connecting to: test
+> show dbs;
+admin	(empty)
+local	(empty)
+safety	0.0625GB
+selenium	0.0625GB
+> use safety
+switched to db safety
+> show collections
+auth_group
+auth_group_permissions
+auth_message
+auth_permission
+auth_user
+auth_user_groups
+auth_user_user_permissions
+django_admin_log
+django_content_type
+django_session
+django_site
+system.indexes
+ ........../admin/ should work 
+
+# sudo python manage.py createsuperuser
+Username (Leave blank to use 'root'): nishant
+E-mail address: saxenadivya2@gmail.com
+Password: nishant1
+Password (again): nishant1 
+Superuser created successfully.
+=========Should be able to login 
+
+
+
+
+
+            
+
+

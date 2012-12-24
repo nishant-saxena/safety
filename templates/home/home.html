@@ -1,0 +1,24 @@
+{% extends "layout/layoutextend.html" %}
+{% block title %} Home  {% endblock title %}
+{% block body %}
+	<h1>HOME PAGE </h1>
+	{% if not user.is_authenticated %}
+	<center>
+		<form action="/login/" method="post">
+		{% csrf_token %}
+		{{ loginform.as_p }}
+		<input type="submit" value="Submit" />
+		</form>
+	</center>	
+	<hr/>
+	<center>
+		<form action="/register/" method="post">
+		{% csrf_token %}
+		{{ registerform.as_p }}
+		<input type="submit" value="Submit" />
+		</form>
+	</center>	
+	{% endif %}
+	
+	
+{% endblock body%}

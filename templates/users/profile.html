@@ -1,0 +1,17 @@
+{% extends "layout/layoutextend.html" %}
+{% block title %} Profile Page  {% endblock title %}
+{% block loginregister %}
+  {% if not user.is_authenticated %}<a href="/register/">register</a> {% endif %}
+  {% if user.is_authenticated %}<a href="/logout/">logout</a>
+  {% endif %}
+ {% endblock loginregister%}
+{% block body %}
+	<h1> Profile Page </h1>
+	<center>
+		<form action="" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Submit" />
+		</form>
+	</center>	
+{% endblock body%}
