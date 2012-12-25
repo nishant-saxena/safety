@@ -2,14 +2,16 @@ from django import forms
 from django.contrib.auth.models import User
 from utility.util import validateEmail
 from users.models import SiteUser
-class RegisterForm(forms.Form):
+from captcha.fields import CaptchaField
+#
+class RegisterFormNonCaptcha(forms.Form):
     first_name=forms.CharField()
     last_name=forms.CharField(required=False)
     username=forms.CharField()
     email = forms.EmailField()
     password=forms.CharField(required=False, widget=forms.PasswordInput(render_value=False), label="Password" )
     repeatpassword=forms.CharField(required=False,widget=forms.PasswordInput(render_value=False), label="Repeat Password" )
-    currentpassword=forms.CharField(required=False, widget=forms.PasswordInput(render_value=False), label="Current Password" )
+    currentpassword=forms.CharField(show_hidden_initial=False ,required=False, widget=forms.PasswordInput(render_value=False), label="Current Password" )
  
     def validate_username(self):
         username=str(self.data.get('username',"")).strip()
@@ -65,7 +67,7 @@ class RegisterForm(forms.Form):
 
 
     def save(self):
-        super(RegisterForm, self).is_valid()
+        super(RegisterFormNonCaptcha, self).is_valid()
         self.validate_username()
         self.validate_first_name()
         self.validate_last_name()
@@ -89,7 +91,7 @@ class RegisterForm(forms.Form):
         su.save()
 
     def change_password(self, user , post , from_token=False):
-        super(RegisterForm, self).is_valid()
+        super(RegisterFormNonCaptcha, self).is_valid()
         #As not complete form expected 
         self._errors.clear()
         if "password" in post:
@@ -104,7 +106,7 @@ class RegisterForm(forms.Form):
         
 
     def update(self ,user ,post):
-        super(RegisterForm, self).is_valid()
+        super(RegisterFormNonCaptcha, self).is_valid()
         self._errors.clear()
         #As not complete form expected 
         save_user=email_change=False
@@ -131,3 +133,6 @@ class RegisterForm(forms.Form):
             user.save()
         if email_change:
             pass #Email change save mail etc
+class RegisterForm(RegisterFormNonCaptcha):
+    captcha = CaptchaField()
+    pass #recaptcha = ReCaptchaField(label="I'm a human")

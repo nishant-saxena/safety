@@ -17,9 +17,10 @@ urlpatterns = patterns('',
     (r'^register/', include('register.urls')),
     (r'^login/', include('login.urls')),
     (r'^profile/', include('users.urls')),
-    
+    url(r'^captcha/', include('captcha.urls')),
     url(r'^$', 'home.views.home', name='home'),
     url(r'^logout/', 'login.views.logout', name='logout'),
+    
     
  )
 import settings

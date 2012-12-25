@@ -1,7 +1,8 @@
 import os
 
 # Django settings for safety project.
-
+RECAPTCHA_PUBLIC_KEY ="6Lebv9oSAAAAAF32uDo_vAGNItGDprGU7WS-zcu2"
+RECAPTCHA_PRIVATE_KEY ="6Lebv9oSAAAAABPmHb79dnFp0Q54QoNeHANkmIYc"
 DEBUG = True
 PROJECT_ROOT=PROJECT_BASE_PATH = os.path.dirname(__file__)
 PROJECT_DIR_NAME = os.path.split(PROJECT_BASE_PATH)[1]
@@ -140,6 +141,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'register',
     'login',
+    'captcha',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
