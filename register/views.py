@@ -4,6 +4,9 @@ from django.contrib import messages
 from forms import RegisterForm
 from django.shortcuts import HttpResponseRedirect
 def register(request):
+    if request.user.is_authenticated():
+        messages.add_message(request, messages.INFO, "You already logged in")
+        return HttpResponseRedirect("/profile/")
     if request.method=="POST":
         form=RegisterForm(request.POST)
         del form.fields["currentpassword"]

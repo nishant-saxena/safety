@@ -11,12 +11,18 @@
 <h1>Register </h1>
 {% csrf_token %}
 {{ form.as_p }}
-{{captcha|safe}}
-
-
-
 <input type="submit" value="Submit" />
 </form>
+
+
+<pre>
+http://code.google.com/p/django-simple-captcha/issues/detail?id=46 [Make ajax call as ajax and update every]
+
+http://django-simple-captcha.googlecode.com/files/django-simple-captcha-0.3.0.zip
+      # http://code.google.com/p/django-simple-captcha/wiki/CaptchaConfiguration
+      # http://code.google.com/p/django-simple-captcha/wiki/CaptchaGenerators
+
+</pre>
 
 	</center>	
 

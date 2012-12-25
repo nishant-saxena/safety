@@ -17,20 +17,8 @@ def show_profile(request):
     else:
         registerform=get_reg_form(request)
     template="profile/profile.html"
+    #print request.user.site_user 
     return TemplateResponse(request,template,{"form":registerform})
-    """
-    del registerform.fields["username"]
-    del registerform.fields["password"]
-    del registerform.fields["currentpassword"]
-    del registerform.fields["repeatpassword"]
-    """
-
-    #request.user.get_mapping()
-    #site_user=request.session["site_user"]
-    #request.session["site_user"] = SiteUser(user)
-
-
-
 
 def change_password(request):
     registerform=get_reg_form(request)

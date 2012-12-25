@@ -1,9 +1,11 @@
 {% extends "layout/layoutextend.html" %}
 {% block title %} Profile  {% endblock title %}
 {% block body %}
-<h1> Profile Page </h1>
 	<center>
-		<h1>Update  Details </h1>
+	<table>
+	<tr>
+	<td>
+		<b>Update  Details </b><hr/>
 		<form action="" method="post">
 		    {{ form.non_field_errors }}
 		    {% csrf_token %}
@@ -20,11 +22,16 @@
 		    <div class="fieldWrapper">
 		        <span class="spanerror">{{ form.email.errors }}</span>
 		        <label for="id_last_name">Email:</label>
-		        {{ form.email }}
+		        {{ form.email }} <a href="#" >TODO VERIFY MAIL</a>
 		    </div>
 		    <p><input type="submit"  value="Update" /></p>
+		        <br/>
+		        TODO : Also on update email put validation if new email is verified
+		        <br/>Also if exist log :- Notify to admin :- Send Message for verification etc.
 		</form>    
-		<h1>Change Passowrd </h1>
+	</td>
+	<td>
+		<b>Change Passowrd </b><hr/>
 		<form action="/profile/change-password/" method="post">
 			{% csrf_token %}
 		    <div class="fieldWrapper">
@@ -46,5 +53,15 @@
 		    <input type="hidden" name="action" value="change_password"/>
 		    <p><input type="submit" value="Change Password" /></p>
 		</form>
+	
+	</td></tr>
+	<tr>
+		<td colspan=2>
+			<h1>Add Friends </h1>
+		</td>
+	</tr>
+	
+	
+	</table>
 	</center>
 {% endblock body%}

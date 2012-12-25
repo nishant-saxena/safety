@@ -13,10 +13,9 @@ def log_user_in(request,user):
     else:
         request.session.cycle_key()
     request.session[SESSION_KEY] = str(user.id)
-    request.session["site_user"] = SiteUser(user)
     request.session[BACKEND_SESSION_KEY] = user.backend
     if hasattr(request, 'user'):
-        request.user = user
+        request.user = user  #request.user.siteuser is stored at time of register
 def logout(request):
     request.session.flush()
     messages.add_message(request, messages.INFO, "Logged out succesfully")
@@ -24,6 +23,9 @@ def logout(request):
 #from django.contrib.auth.decorators import login_required
 #@login_required
 def login(request):
+    if request.user.is_authenticated():
+        messages.add_message(request, messages.INFO, "You already logged in")
+        return HttpResponseRedirect("/profile/")
     if request.method=="POST":
         form=LoginForm(request.POST)
         errors=form.is_valid()
@@ -33,7 +35,7 @@ def login(request):
                 log_user_in(request,user)
                 return HttpResponseRedirect("/profile/")
             else:
-                messages.add_message(request, messages.INFO, "User Password mismatch")
+                messages.add_message(request, messages.ERROR, "User Password mismatch")
 
     else:
         form=LoginForm()
