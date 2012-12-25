@@ -16,6 +16,10 @@ def log_user_in(request,user):
     request.session[BACKEND_SESSION_KEY] = user.backend
     if hasattr(request, 'user'):
         request.user = user  #request.user.siteuser is stored at time of register
+    if 'siteuser' not  in dir(request.user):
+        from users.models import SiteUser
+        su = SiteUser(u=user)
+        su.save()
 def logout(request):
     request.session.flush()
     messages.add_message(request, messages.INFO, "Logged out succesfully")
