@@ -1,0 +1,32 @@
+git clone https://github.com/django-nonrel/django-nonrel  #checkout master # setup.py
+git clone https://github.com/django-nonrel/djangotoolbox  #checkout master # setup.py
+git clone https://github.com/django-nonrel/mongodb-engine  #checkout master # setup.py
+http://django-simple-captcha.googlecode.com/files/django-simple-captcha-0.3.0.zip
+      # http://code.google.com/p/django-simple-captcha/wiki/CaptchaConfiguration
+      # http://code.google.com/p/django-simple-captcha/wiki/CaptchaGenerators
+      
+http://stackoverflow.com/questions/2275806/easy-to-use-django-captcha-or-registration-app-with-captcha
+	#http://stackoverflow.com/questions/2275806/easy-to-use-django-captcha-or-registration-app-with-captcha
+	
+	Not Configurable ===> 
+	What about https://github.com/praekelt/django-recaptcha/blob/master/captcha/widgets.py
+	as 
+	=============== 1 way =====================================
+	forms.py
+	from registration.backends.default import DefaultBackend
+	from registration.forms import RegistrationForm
+	
+	class RecaptchaRegistrationForm(RegistrationForm)
+	    recaptcha = ReCaptchaField(label="I'm a human")
+	
+	class RecaptchaRegistrationBackend(DefaultBackend):
+	    def get_form_class(self, request):
+	        return RecaptchaRegistrationForm
+	============== 2nd way =====================================
+	views.py
+		from recaptcha.client import captcha
+		import settings
+		"captcha":captcha.displayhtml(settings.RECAPTCHA_PUBLIC_KEY)
+    template
+    	{{captcha}}
+    	
