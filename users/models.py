@@ -3,7 +3,7 @@
 from django.db import models
 # Create your models here.
 from django.contrib.auth.models import User 
-from djangotoolbox.fields import ListField ,EmbeddedModelField
+from djangotoolbox.fields import ListField ,DictField ,EmbeddedModelField
 
 class SiteUser(models.Model):
     # This field is required.
@@ -11,15 +11,15 @@ class SiteUser(models.Model):
     #User
     u = models.OneToOneField(User) 
     #Mobile1
-    m1 = EmbeddedModelField() # {"mobile":"number", "verified":"??"} 10 digit number => 91 understood
+    m1 = DictField() # {"mobile":"number", "verified":"??"} 10 digit number => 91 understood
     #Mobile2
-    m2 = EmbeddedModelField() # {"mobile":"number", "verified":"??"} 10 digit number => 91 understood
+    m2 = DictField() # {"mobile":"number", "verified":"??"} 10 digit number => 91 understood
     #Mobile3
-    m3 = EmbeddedModelField() # {"mobile":"number", "verified":"??"} 10 digit number => 91 understood
+    m3 = DictField() # {"mobile":"number", "verified":"??"} 10 digit number => 91 understood
     #Phone1
-    p1 = EmbeddedModelField() # {"phone":"number","std":"stdcode","verified":"??"} 
+    p1 = DictField() # {"phone":"number","std":"stdcode","verified":"??"} 
     #Phone2
-    p2 = EmbeddedModelField() # {"phone":"number","std":"stdcode","verified":"??"} 
+    p2 = DictField() # {"phone":"number","std":"stdcode","verified":"??"} 
     
     # Other fields here
     #Friends

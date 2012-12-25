@@ -16,10 +16,11 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'^register/', include('register.urls')),
     (r'^login/', include('login.urls')),
+    (r'^profile/', include('users.urls')),
     
     url(r'^$', 'home.views.home', name='home'),
     url(r'^logout/', 'login.views.logout', name='logout'),
-    url(r'^profile/', 'users.views.show_profile', name='logout'),
+    
  )
 import settings
 urlpatterns += patterns("django.views",

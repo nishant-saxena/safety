@@ -5,7 +5,7 @@ from forms import LoginForm
 from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth import authenticate ,logout
 from django.contrib.auth import SESSION_KEY, BACKEND_SESSION_KEY
-
+from users.models import SiteUser
 def log_user_in(request,user):
     if SESSION_KEY in request.session:
         if request.session[SESSION_KEY] != str(user.id):
@@ -13,6 +13,7 @@ def log_user_in(request,user):
     else:
         request.session.cycle_key()
     request.session[SESSION_KEY] = str(user.id)
+    request.session["site_user"] = SiteUser(user)
     request.session[BACKEND_SESSION_KEY] = user.backend
     if hasattr(request, 'user'):
         request.user = user

@@ -8,17 +8,17 @@
 		    {{ form.non_field_errors }}
 		    {% csrf_token %}
 		    <div class="fieldWrapper">
-		        <span class="spanerror">{{ form.first_name.errors }}</span>
+		        {{ form.first_name.errors }}
 		        <label for="id_first_name">First Name:</label>
 		        {{ form.first_name }}
 		    </div>
 		    <div class="fieldWrapper">
-		        <span class="spanerror">{{ form.last_name.errors }}</span>
+		        {{ form.last_name.errors }}
 		        <label for="id_last_name">Last Name:</label>
 		        {{ form.last_name }}
 		    </div>
 		    <div class="fieldWrapper">
-		        <span class="spanerror">{{ form.email.errors }}</span>
+		        {{ form.email.errors }}
 		        <label for="id_last_name">Email:</label>
 		        {{ form.email }}
 		    </div>
@@ -28,7 +28,7 @@
 		<form action="/profile/change-password/" method="post">
 			{% csrf_token %}
 		    <div class="fieldWrapper">
-		        <span class="spanerror">{{ form.currentpassword.errors }}</span>
+		        {{ form.currentpassword.errors }}
 		        <label for="id_last_name">Current Password :</label>
 		        {{ form.currentpassword }}
 		    </div>
