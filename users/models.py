@@ -37,7 +37,9 @@ class SiteUser(models.Model):
                     "phone1":self.p1 , "phone2":self.p2 , "friends":self.f , "anonymous_friends":self.af ,
                     "devices":self.d , "other_info":self.o  }
 
-        
+    def __str__(self):
+        return str(self.get_mapping())
+
 
 class Devices(models.Model):
     #Owner

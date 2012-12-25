@@ -17,6 +17,8 @@ def show_profile(request):
     else:
         registerform=get_reg_form(request)
     template="profile/profile.html"
+    import pdb;
+    pdb.set_trace()
     #print request.user.site_user 
     return TemplateResponse(request,template,{"form":registerform})
 
